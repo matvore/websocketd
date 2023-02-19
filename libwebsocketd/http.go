@@ -154,9 +154,7 @@ func (h *WebsocketdServer) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 				cgienv[envlen] = "SERVER_SOFTWARE=" + h.Config.ServerSoftware
 				cgiHandler := &cgi.Handler{
 					Path: filePath,
-					Env: []string{
-						"SERVER_SOFTWARE=" + h.Config.ServerSoftware,
-					},
+					Env: cgienv,
 				}
 				log.Access("http", "CGI")
 				cgiHandler.ServeHTTP(w, req)
